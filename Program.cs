@@ -20,52 +20,51 @@ using (StreamWriter escrever = new StreamWriter("jogos-mega-sena.txt"))
     {
         Console.Write("\nDeseja realizar quantos jogos: ");
         if (int.TryParse(Console.ReadLine(), out int qtdJogoInformada))
-        {
-            
+        {           
             Console.Write("\nInformar a quantidade de dezena: ");
             if (int.TryParse(Console.ReadLine(), out int qtdDezenaInformada))
             {
                 if (qtdDezenaInformada < 6 || qtdDezenaInformada > 15)
-                            repetir = true;
-                    else
-                                repetir = false;
-
+                    repetir = true;
+                else
+                    repetir = false;
+                
                 if (repetir == false)
                 {
                     for (int i = 0; i < qtdJogoInformada; i++)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.Write($"\x0A Jogo {i + 1}: ");
+                        escrever.Write($"\x0A Jogo {i + 1}: ");
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        while (numerosUnicos.Count < qtdDezenaInformada)
                         {
-                            Console.ForegroundColor = ConsoleColor.Blue;
-                            Console.Write($"\x0A Jogo {i + 1}: ");
-                            escrever.Write($"\x0A Jogo {i + 1}: ");
-                            Console.ForegroundColor = ConsoleColor.DarkGreen;
-                            while (numerosUnicos.Count < qtdDezenaInformada)
-                            {
-                                int numero = rnd.Next(1, 61);
-                                numerosUnicos.Add(numero);
-                            }
-                            int[] Jogos = new int[qtdDezenaInformada];
-                            numerosUnicos.CopyTo(Jogos);
-                            foreach (int a in Jogos)
-                            {
-                                if (a == Jogos[0])
-                                {
-                                    Console.Write($"{a:D2}");
-                                    escrever.Write($"{a:D2}");
-                                }  
-                                else
-                                {
-                                    Console.Write($"-{a:D2}");
-                                    escrever.Write($"-{a:D2}");
-                                }
-                            }
-                            numerosUnicos.Clear();
+                            int numero = rnd.Next(1, 61);
+                            numerosUnicos.Add(numero);
                         }
+                        int[] Jogos = new int[qtdDezenaInformada];
+                        numerosUnicos.CopyTo(Jogos);
+                        foreach (int a in Jogos)
+                        {
+                            if (a == Jogos[0])
+                            {
+                                Console.Write($"{a:D2}");
+                                escrever.Write($"{a:D2}");
+                            }  
+                            else
+                            {
+                                Console.Write($"-{a:D2}");
+                                escrever.Write($"-{a:D2}");
+                            }
+                        }
+                        numerosUnicos.Clear();
+                    }
                             
-                        escrever.WriteLine();
-                        Console.WriteLine();
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("\nJogos gerados e salvos no arquivo 'jogos-mega-sena.txt'.\n");
-                        Console.ResetColor();
+                    escrever.WriteLine();
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("\nJogos gerados e salvos no arquivo 'jogos-mega-sena.txt'.\n");
+                    Console.ResetColor();
                 }
                 else
                 {
