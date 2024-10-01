@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-Console.Clear();
+﻿Console.Clear();
 
 int largura = 32; // Ajuste a largura do cabeçalho conforme necessário
 
