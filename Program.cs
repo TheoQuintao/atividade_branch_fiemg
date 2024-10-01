@@ -10,8 +10,8 @@ Console.WriteLine("Atividade 13 - Jogo da Mega-Sena");
 Console.WriteLine("=".PadLeft(largura, '='));
 Console.ResetColor();
 
-
-Random random = new Random();
+Random rnd = new Random();
+HashSet<int> numerosUnicos = new HashSet<int>();
 
 int qtdDezena;
 
@@ -33,15 +33,27 @@ using (StreamWriter escrever = new StreamWriter("jogos-mega-sena.txt"))
 
                 if (repetir == false)
                 {
-                    Console.WriteLine();
-                    for (int qtdJogo = 1;   qtdJogo <= qtdJogoInformada; qtdJogo--)
-                    {
-                        for (qtdDezena = 1; qtdDezena <= qtdDezenaInformada; qtdDezena++)
+                    for (int i = 0; i < qtdJogoInformada; i++)
                         {
-
+                            Console.Write($"\x0A Jogo {i + 1}: ");
+                            while (numerosUnicos.Count < qtdDezenaInformada)
+                            {
+                                int numero = rnd.Next(1, 61);
+                                numerosUnicos.Add(numero);
+                            }
+                            int[] Jogos = new int[qtdDezenaInformada];
+                            numerosUnicos.CopyTo(Jogos);
+                            foreach (int a in Jogos)
+                            {
+                                if (a == Jogos[0])
+                                    Console.Write($"{a:D2}");
+                                else
+                                    Console.Write($"-{a:D2}");
+                            }
+                            numerosUnicos.Clear();
                         }
-                        escrever.WriteLine();
-                    }
+                        
+                    escrever.WriteLine();
                     Console.WriteLine();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("Jogos gerados e salvos no arquivo 'jogos-mega-sena.txt'.\n");
@@ -53,6 +65,7 @@ using (StreamWriter escrever = new StreamWriter("jogos-mega-sena.txt"))
                     repetir = true;
 
                 }
+            
             }    
             else
                 {
